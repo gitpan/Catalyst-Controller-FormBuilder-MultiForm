@@ -37,9 +37,9 @@ sub setup_template_vars
     foreach my $template_var ( %FIELD_VARS )
     {
       # Adjust the template var to include the real field name
-      $template_var = sprintf($template_var, $field);
+      my $adjusted_template_var = sprintf($template_var, $field);
       
-      $form_template_vars{"$form_name-$template_var"} = $c->stash->{$template_var};
+      $form_template_vars{"$form_name-$adjusted_template_var"} = $c->stash->{$adjusted_template_var};
     }
   }
   
