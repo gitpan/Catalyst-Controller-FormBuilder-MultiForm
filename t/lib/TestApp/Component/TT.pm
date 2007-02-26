@@ -11,8 +11,8 @@ sub new {
     $self->config(
         {
             INCLUDE_PATH => [
-                TestApp->path_to( 'root', 'src', 'tt2' ),
-                TestApp->path_to( 'root', 'lib', 'tt2' ),
+                TestApp->path_to( 'root', 'src', 'Template-Toolkit' ),
+                TestApp->path_to( 'root', 'lib', 'Template-Toolkit' ),
             ],
             TEMPLATE_EXTENSION => '',
             CATALYST_VAR       => 'Catalyst',

@@ -12,7 +12,7 @@ sub new {
         {
             die_on_bad_params => 0,
             path              => [
-                TestApp->path_to( 'root', 'src', 'tmpl' ),
+                TestApp->path_to( 'root', 'src', 'HTML-Template' ),
             ],
         },
     );

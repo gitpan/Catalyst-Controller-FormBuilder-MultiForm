@@ -9,7 +9,7 @@ use base 'Catalyst::View::Mason';
 sub new {
     my $self = shift;
 
-    my $comp_root = TestApp->path_to( 'root', 'src', 'mason' );
+    my $comp_root = TestApp->path_to( 'root', 'src', 'Mason' );
     $self->config->{comp_root} = "$comp_root";
 
     return $self->NEXT::new(@_);

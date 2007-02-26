@@ -114,6 +114,7 @@ TEMPLATES
     Example of rendering a form named "foo" in HTML::Template:
 
       <tmpl_var foo-form-start>
+      <tmpl_var foo-form-statetags>
       <tmpl_var foo-label-username> <tmpl_var foo-field-username>
       <tmpl_var foo-label-password> <tmpl_var foo-field-password>
       <tmpl_var foo-form-submit>
@@ -128,9 +129,16 @@ CONFIGURATION
 
       MyApp->config
       (
+        # Define config options specific to MultiForm
         'Controller::FormBuilder::MultiForm' => 
         {
           stash_name => 'lots_of_forms_in_here',
+          template_type => 'TT',
+        }
+        # Define any regular FormBuilder config options
+        'Controller::FormBuilder' => 
+        {
+          # ..
         }
       );
 
@@ -147,6 +155,13 @@ CONFIGURATION
         please in the appropriate configuration section.
 
         Default: "forms"
+
+    "template_type"
+        Defines the Catalyst View that the stash will be prepared for.
+
+        Possible values are: "HTML::Template", "Mason" or "TT".
+
+        Default: "TT"
 
 CAVEATS
   Form Name is Required
@@ -172,8 +187,8 @@ CAVEATS
     this module. For example, you could make an AJAX call to generate a
     series of "create" forms on the fly.
 
-    However, because FormBuilder does not enforce unique field names at the
-    moment, this functionality will not be available in MultiForm.
+    However, because CGI::FormBuilder does not yet support unique field
+    names on the fly, this functionality will not be available in MultiForm.
 
 SEE ALSO
     Catalyst::Controller::FormBuilder, CGI::FormBuilder, Catalyst::Manual

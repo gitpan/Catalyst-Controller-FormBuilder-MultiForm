@@ -17,7 +17,7 @@ my $page = "test/hybrid";
 $mech->get_ok( "http://localhost/$page", "GET /$page" );
 
 my $std_form = $mech->form_name('standard');
-ok( $std_form, "FormBuilder form found" ) or BAIL_OUT( "Can't do anything without a form!" );
+ok( $std_form, "Form found" ) or BAIL_OUT( "Cannot locate FormBuilder form, unable to continue tests" );
 
 my $std_one = $std_form->find_input( 'standard_one' );
 ok( $std_one, "First input field found in FormBuilder form");
@@ -33,15 +33,15 @@ is( $std_two->value, 'std_two_value', "Set second input field value in FormBuild
 
 $mech->submit;
 
-like( $mech->content, qr/form:standard/, "FormBuilder form submitted correctly" );
-like( $mech->content, qr/standard_one:std_one_value/, "First input value in FormBuilder form submitted correctly" );
-like( $mech->content, qr/standard_two:std_two_value/, "Second input value in FormBuilder form submitted correctly" );
+like( $mech->content, qr/form:standard/, "FormBuilder form submitted" );
+like( $mech->content, qr/standard_one:std_one_value/, "First input value submitted in FormBuilder form" );
+like( $mech->content, qr/standard_two:std_two_value/, "Second input value submitted in FormBuilder form" );
 
 
 $mech->get_ok( "http://localhost/$page", "GET /$page" );
 
 my $foo_form = $mech->form_name('foo');
-ok( $foo_form, "First MultiForm form found" ) or BAIL_OUT( "Can't do anything without a form!" );
+ok( $foo_form, "First form found" ) or BAIL_OUT( "Cannot locate first MultiForm form, unable to continue tests" );
 
 my $foo_one = $foo_form->find_input( 'foo_one' );
 ok( $foo_one, "First input field in first MultiForm form found");
@@ -53,19 +53,19 @@ $foo_one->value('foo_one_value');
 is( $foo_one->value, 'foo_one_value', "Set first input field value in first MultiForm form" );
 
 $foo_two->value('foo_two_value');
-is( $foo_two->value, 'foo_two_value', "Set second input field value in first fMultiForm orm" );
+is( $foo_two->value, 'foo_two_value', "Set second input field value in first MultiForm form" );
 
 $mech->submit;
 
-like( $mech->content, qr/form:foo/, "First MultiForm form submitted correctly" );
-like( $mech->content, qr/foo_one:foo_one_value/, "First input value in first MultiForm form submitted correctly" );
-like( $mech->content, qr/foo_two:foo_two_value/, "Second input value in first MultiForm form submitted correctly" );
+like( $mech->content, qr/form:foo/, "First MultiForm form submitted" );
+like( $mech->content, qr/foo_one:foo_one_value/, "First input value in first MultiForm form submitted" );
+like( $mech->content, qr/foo_two:foo_two_value/, "Second input value in first MultiForm form submitted" );
 
 
 $mech->get_ok( "http://localhost/$page", "GET /$page" );
 
 my $bar_form = $mech->form_name('bar');
-ok( $bar_form, "Second MultiForm form found" ) or BAIL_OUT( "Can't do anything without a form!" );
+ok( $bar_form, "Second form found" ) or BAIL_OUT( "Cannot locate second MultiForm form, unable to continue tests" );
 
 my $bar_one = $bar_form->find_input( 'bar_one' );
 ok( $bar_one, "First input field in second MultiForm form found");
@@ -81,6 +81,6 @@ is( $bar_two->value, 'bar_two_value', "Set second input field value in second Mu
 
 $mech->submit;
 
-like( $mech->content, qr/form:bar/, "Second MultiForm form submitted correctly" );
-like( $mech->content, qr/bar_one:bar_one_value/, "First input value in second MultiForm form submitted correctly" );
-like( $mech->content, qr/bar_two:bar_two_value/, "Second input value in second MultiForm form submitted correctly" );
+like( $mech->content, qr/form:bar/, "Second MultiForm form submitted" );
+like( $mech->content, qr/bar_one:bar_one_value/, "First input value in second MultiForm form submitted" );
+like( $mech->content, qr/bar_two:bar_two_value/, "Second input value in second MultiForm form submitted" );
